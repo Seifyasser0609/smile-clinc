@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smile Clinic - عيادة الابتسامة</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* استيراد خط عصري */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background: #f5f9ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #1e2b4f;
+    }
+
+    /* خلفية متحركة طبية */
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, #e6f0fa, #d4e4f5 50%, #f9f3e7);
+      z-index: -2;
+    }
+
+    .animated-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      background: rgba(70, 130, 200, 0.03);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(70, 130, 200, 0.1);
+      border-radius: 50%;
+      animation: float 20s infinite;
+    }
+
+    .shape1 {
+      width: 500px;
+      height: 500px;
+      top: -200px;
+      right: -200px;
+      background: linear-gradient(135deg, #c8dff5 0%, #a8c9f0 100%);
+      opacity: 0.4;
+      animation-delay: 0s;
+    }
+
+    .shape2 {
+      width: 400px;
+      height: 400px;
+      bottom: -150px;
+      left: -150px;
+      background: linear-gradient(135deg, #f0e9db 0%, #f5e8d1 100%);
+      opacity: 0.35;
+      animation-delay: -5s;
+    }
+
+    .shape3 {
+      width: 300px;
+      height: 300px;
+      top: 40%;
+      left: 20%;
+      background: linear-gradient(135deg, #b8d6f0 0%, #d4e8ff 100%);
+      opacity: 0.3;
+      animation-delay: -2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, 50px) scale(1.1); }
+      50% { transform: translate(100px, -20px) scale(0.9); }
+      75% { transform: translate(-30px, 70px) scale(1.05); }
+    }
+
+    /* تصميم زجاجي للبطاقات */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(70, 130, 200, 0.15);
+      border-radius: 30px;
+      box-shadow: 0 15px 35px rgba(27, 58, 112, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(70, 130, 200, 0.3);
+      box-shadow: 0 25px 45px rgba(27, 58, 112, 0.2);
+    }
+
+    /* شريط التنقل الزجاجي */
+    .navbar {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(70, 130, 200, 0.2);
+      border-radius: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(27, 58, 112, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #2b6c9e 0%, #4a8bc4 100%);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      transform: rotate(10deg);
+      transition: transform 0.3s;
+      color: white;
+    }
+
+    .logo-icon:hover {
+      transform: rotate(360deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #1e3a6b;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(43, 108, 158, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-links a:hover::before {
+      left: 100%;
+    }
+
+    .nav-links a:hover {
+      background: rgba(43, 108, 158, 0.1);
+    }
+
+    .nav-links .active {
+      background: #2b6c9e;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 60px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #0a2647;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #3a4e6b;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      border-radius: 50px;
+      border: none;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1a4972 0%, #2b6c9e 100%);
+      color: white;
+      box-shadow: 0 10px 30px rgba(27, 58, 112, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(27, 58, 112, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(43, 108, 158, 0.2);
+      color: #1e3a6b;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      transform: translateY(-3px);
+      border-color: #2b6c9e;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .hero-image {
+      position: relative;
+      animation: floatImage 6s ease-in-out infinite;
+    }
+
+    .hero-image img {
+      width: 100%;
+      filter: drop-shadow(0 20px 30px rgba(27, 58, 112, 0.2));
+    }
+
+    @keyframes floatImage {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Stats Cards */
+    .stats {
+      max-width: 1200px;
+      margin: 60px auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .stat-card {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 800;
+      color: #1a4972;
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: #4a627a;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    /* Services Section */
+    .services {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #0a2647;
+    }
+
+    .section-title p {
+      color: #4a627a;
+      font-size: 18px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .service-card {
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px;
+      background: linear-gradient(135deg, #e3f0ff 0%, #c9e0ff 100%);
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      transform: rotate(5deg);
+      transition: transform 0.3s;
+      color: #1a4972;
+    }
+
+    .service-card:hover .service-icon {
+      transform: rotate(365deg);
+    }
+
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #1e3a6b;
+    }
+
+    .service-card p {
+      color: #4a627a;
+      line-height: 1.6;
+    }
+
+    /* Booking Section */
+    .booking {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 60px;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .booking-form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 18px 25px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(43, 108, 158, 0.2);
+      border-radius: 50px;
+      color: #1e3a6b;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #2b6c9e;
+      background: white;
+      box-shadow: 0 0 20px rgba(43, 108, 158, 0.15);
+    }
+
+    .form-group input::placeholder {
+      color: #8a9bb0;
+    }
+
+    /* Date picker styling */
+    .date-group {
+      margin-bottom: 5px;
+    }
+
+    .date-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #1e3a6b;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .date-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .date-input-wrapper i {
+      position: absolute;
+      right: 20px;
+      color: #2b6c9e;
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    .date-input-wrapper select {
+      width: 100%;
+      padding: 18px 25px 18px 50px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(43, 108, 158, 0.2);
+      border-radius: 50px;
+      color: #1e3a6b;
+      font-size: 16px;
+      transition: all 0.3s;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .date-input-wrapper select:focus {
+      outline: none;
+      border-color: #2b6c9e;
+      background: white;
+      box-shadow: 0 0 20px rgba(43, 108, 158, 0.15);
+    }
+
+    /* Time slots styling */
+    .time-slots {
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      padding: 15px;
+    }
+
+    .time-slots-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      color: #1e3a6b;
+      font-weight: 600;
+    }
+
+    .time-slots-header span {
+      font-size: 14px;
+      background: #e3f0ff;
+      padding: 5px 12px;
+      border-radius: 30px;
+      color: #1a4972;
+    }
+
+    .slots-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 5px;
+    }
+
+    .time-slot {
+      padding: 10px 18px;
+      background: white;
+      border: 1px solid rgba(43, 108, 158, 0.2);
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e3a6b;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .time-slot:hover:not(.booked):not(.loading) {
+      background: #2b6c9e;
+      color: white;
+      border-color: #2b6c9e;
+      transform: translateY(-2px);
+    }
+
+    .time-slot.selected {
+      background: #1a4972;
+      color: white;
+      border-color: #1a4972;
+      box-shadow: 0 5px 15px rgba(26, 73, 114, 0.3);
+    }
+
+    .time-slot.booked {
+      background: #f0f0f0;
+      color: #999;
+      border-color: #ddd;
+      cursor: not-allowed;
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+
+    .time-slot.loading {
+      background: #f5f5f5;
+      color: #666;
+      border-color: #ddd;
+      cursor: wait;
+      opacity: 0.7;
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(43, 108, 158, 0.2);
+      border-radius: 50%;
+      border-top-color: #2b6c9e;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Testimonials */
+    .testimonials {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      padding: 30px;
+    }
+
+    .testimonial-text {
+      color: #2a405c;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      background: #e9f0f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #1a4972;
+      border: 2px solid white;
+    }
+
+    .author-info h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #1e3a6b;
+    }
+
+    .author-info p {
+      color: #6b7f99;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: 1200px;
+      margin: 100px auto 40px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .social-links a {
+      width: 50px;
+      height: 50px;
+      background: rgba(43, 108, 158, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a4972;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 20px;
+    }
+
+    .social-links a:hover {
+      background: #2b6c9e;
+      color: white;
+      transform: translateY(-5px);
+    }
+
+    .footer p {
+      color: #5a6f8a;
+    }
+
+    /* AI Chat Button */
+    .ai-chat-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 35px;
+      background: linear-gradient(135deg, #1a4972, #2b6c9e);
+      border: none;
+      color: white;
+      font-size: 35px;
+      cursor: pointer;
+      box-shadow: 0 5px 30px rgba(27, 58, 112, 0.3);
+      z-index: 1000;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .ai-chat-btn:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 10px 40px rgba(27, 58, 112, 0.4);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Alert messages */
+    .alert-message {
+      padding: 15px 20px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      animation: slideIn 0.3s ease;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    .alert-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Week indicator */
+    .week-indicator {
+      background: #e3f0ff;
+      padding: 10px 15px;
+      border-radius: 50px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #1a4972;
+      font-weight: 600;
+    }
+
+    .week-indicator i {
+      font-size: 18px;
+    }
+
+    /* Mobile Responsive */
+    .nav-toggle{
+      display:none;
+      width:48px;
+      height:48px;
+      border-radius: 18px;
+      border: 1px solid rgba(70, 130, 200, 0.25);
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:12px;
+      box-shadow: 0 8px 24px rgba(27, 58, 112, 0.08);
+    }
+    .nav-toggle span{
+      display:block;
+      width:20px;
+      height:2px;
+      background: #1e3a6b;
+      border-radius: 999px;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .nav-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 90;
+    }
+
+    /* override old mobile navbar behavior */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: row;
+        gap: 12px;
+      }
+      .nav-toggle{ display:flex; }
+
+      .nav-links{
+        display:none !important;
+        position: fixed;
+        top: 76px;
+        left: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(70, 130, 200, 0.22);
+        border-radius: 22px;
+        box-shadow: 0 18px 45px rgba(27, 58, 112, 0.18);
+        padding: 12px;
+        z-index: 100;
+        flex-direction: column;
+        gap: 10px;
+        animation: fadeInUpMenu .18s ease;
+      }
+      .nav-links.open{ display:flex !important; }
+      .nav-links a{
+        display:flex;
+        justify-content:center;
+        padding: 12px 14px;
+        font-size: 15px;
+      }
+      @keyframes fadeInUpMenu{
+        from{ opacity:0; transform: translateY(-8px); }
+        to{ opacity:1; transform: translateY(0); }
+      }
+
+      .navbar{
+        top: 0;
+        margin: 0;
+        border-radius: 0;
+        padding: 12px 16px;
+      }
+
+      .hero {
+        margin: 35px auto;
+        padding: 26px;
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 { font-size: 38px; }
+      .hero-buttons { flex-direction: column; }
+      .btn { width: 100%; justify-content:center; }
+      
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .services-grid,
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .booking-grid { grid-template-columns: 1fr; }
+
+      .ai-chat-modal{ width: calc(100% - 24px); left: 12px; right: 12px; }
+      .ai-chat-btn{ left: 16px; bottom: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="gradient-bg"></div>
+  <div class="animated-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
+
+  <!-- AI Chat Button -->
+  <button class="ai-chat-btn" id="aiChatBtn">
+    <i class="fas fa-robot"></i>
+  </button>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-tooth"></i>
+      </div>
+      <div>
+        <h3 style="font-size: 24px; color: #0a2647;">Smile Clinic</h3>
+        <p style="font-size: 12px; color: #4a627a;">Dental Care</p>
+      </div>
+    </div>
+    
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">الرئيسية</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#booking">احجز موعد</a>
+      <a href="#testimonials">آراء المرضى</a>
+      <a href="#about">عن العيادة</a>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" hidden></div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>ابتسامة مشرقة تبدأ من هنا</h1>
+      <p>أحدث التقنيات في طب الأسنان مع فريق طبي متخصص. نقدم رعاية شاملة ومريحة لكل أفراد العائلة في بيئة طبية راقية.</p>
+      <div class="hero-buttons">
+        <a href="#booking" class="btn btn-primary">
+          <i class="fas fa-calendar-check"></i>
+          احجز موعدك الآن
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <i class="fas fa-phone-alt"></i>
+          اتصل بنا
+        </a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%232b6c9e' d='M100 20c-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80-35.8-80-80-80zm0 140c-33.1 0-60-26.9-60-60s26.9-60 60-60 60 26.9 60 60-26.9 60-60 60z'/%3E%3Ccircle fill='%23ffffff' cx='100' cy='100' r='40'/%3E%3C/svg%3E" alt="Dental">
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stat-card glass-card">
+      <div class="stat-number">+500</div>
+      <div class="stat-label">مريض شهرياً</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-number">10+</div>
+      <div class="stat-label">سنوات خبرة</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-number">98%</div>
+      <div class="stat-label">رضا المرضى</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">خدمة طوارئ</div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="section-title">
+      <h2>خدماتنا المتميزة</h2>
+      <p>نقدم أحدث العلاجات بتقنيات متطورة</p>
+    </div>
+    
+    <div class="services-grid">
+      <div class="service-card glass-card">
+        <div class="service-icon">
+          <i class="fas fa-tooth"></i>
+        </div>
+        <h3>كشف شامل</h3>
+        <p>فحص دقيق وتشخيص متكامل باستخدام أحدث الأجهزة الرقمية</p>
+      </div>
+      
+      <div class="service-card glass-card">
+        <div class="service-icon">
+          <i class="fas fa-broom"></i>
+        </div>
+        <h3>تنظيف وجير</h3>
+        <p>إزالة الجير والرواسب بلطف للحصول على أسنان نظيفة وصحية</p>
+      </div>
+      
+      <div class="service-card glass-card">
+        <div class="service-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3>تبييض الأسنان</h3>
+        <p>تبييض احترافي بتقنيات آمنة وفعالة لابتسامة أكثر إشراقاً</p>
+      </div>
+      
+      <div class="service-card glass-card">
+        <div class="service-icon">
+          <i class="fas fa-wrench"></i>
+        </div>
+        <h3>حشو وعلاج</h3>
+        <p>علاج التسوس بحشوات تجميلية متطورة تدوم طويلاً</p>
+      </div>
+      
+      <div class="service-card glass-card">
+        <div class="service-icon">
+          <i class="fas fa-ruler"></i>
+        </div>
+        <h3>تقويم الأسنان</h3>
+        <p>تقويم شفاف وتقليدي حسب احتياجات كل حالة</p>
+      </div>
+      
+      <div class="service-card glass-card">
+        <div class="service-icon">
+          <i class="fas fa-gem"></i>
+        </div>
+        <h3>ابتسامة هوليود</h3>
+        <p>فينير وقشور تجميلية لابتسامة مثالية</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section class="booking glass-card" id="booking">
+    <div class="booking-grid">
+      <div>
+        <h2 style="font-size: 42px; margin-bottom: 20px; color: #0a2647;">احجز موعدك الآن</h2>
+        <p style="color: #4a627a; line-height: 1.8; margin-bottom: 30px;">
+          احجز موعدك بسهولة وسنؤكده عبر واتساب. اختر التاريخ والوقت المناسب لك من المواعيد المتاحة للأيام السبعة القادمة.
+        </p>
+        
+        <div class="week-indicator">
+          <i class="fas fa-calendar-week"></i>
+          <span>الحجز متاح للأيام السبعة القادمة فقط</span>
+        </div>
+        
+        <div id="bookingAlert" style="display: none;"></div>
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-check-circle" style="color: #2b6c9e;"></i>
+            <span style="color: #1e3a6b;">مواعيد متاحة فورية</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-check-circle" style="color: #2b6c9e;"></i>
+            <span style="color: #1e3a6b;">تأكيد فوري</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-check-circle" style="color: #2b6c9e;"></i>
+            <span style="color: #1e3a6b;">تذكير قبل الموعد</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="booking-form">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="الاسم الكامل" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" id="phone" placeholder="رقم الجوال" required>
+        </div>
+        
+        <!-- Date picker with dropdown -->
+        <div class="form-group date-group">
+          <label for="date">
+            <i class="far fa-calendar-alt" style="margin-left: 8px;"></i>
+            اختر التاريخ (الأيام القادمة فقط)
+          </label>
+          <div class="date-input-wrapper">
+            <i class="far fa-calendar-check"></i>
+            <select id="date" required>
+              <option value="">-- اختر التاريخ --</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Time slots container -->
+        <div id="timeSlotsContainer" style="display: none;">
+          <div class="time-slots">
+            <div class="time-slots-header">
+              <span>المواعيد المتاحة</span>
+              <span id="selectedDateDisplay"></span>
+            </div>
+            <div id="timeSlots" class="slots-container">
+              <!-- Time slots will be dynamically added here -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hidden time input to store selected time -->
+        <input type="hidden" id="selectedTime">
+        
+        <div class="form-group">
+          <select id="reason" required>
+            <option value="">سبب الزيارة</option>
+            <option value="كشف دوري">كشف دوري</option>
+            <option value="ألم في الأسنان">ألم في الأسنان</option>
+            <option value="تنظيف وجير">تنظيف وجير</option>
+            <option value="تبييض">تبييض</option>
+            <option value="تقويم">تقويم</option>
+            <option value="حشو">حشو</option>
+            <option value="خلع">خلع</option>
+            <option value="استشارة">استشارة</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="bookBtn" style="width: 100%;" disabled>
+          <i class="fas fa-calendar-check"></i>
+          تأكيد الحجز
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-title">
+      <h2>ماذا يقول مرضانا</h2>
+      <p>آراء حقيقية من مرضى سعداء</p>
+    </div>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card glass-card">
+        <div class="testimonial-text">
+          "أفضل عيادة أسنان زرتها. تعامل راقي ونظافة وتعقيم ممتازين. الدكتور شرحلي كل خطوة بالتفصيل."
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">أ</div>
+          <div class="author-info">
+            <h4>أحمد عبدالله</h4>
+            <p>عميل منذ ٢٠٢٣</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card glass-card">
+        <div class="testimonial-text">
+          "عملت تبييض أسنان والنتيجة خرافية! الفريق كله محترف ومتعاون. أنصح بالعيادة بشدة."
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">س</div>
+          <div class="author-info">
+            <h4>سارة محمد</h4>
+            <p>عميلة منذ ٢٠٢٤</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card glass-card">
+        <div class="testimonial-text">
+          "نظام الحجز أونلاين مريح جداً والمواعيد دقيقة. والتذكير بالواتساب شيء رائع!"
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">خ</div>
+          <div class="author-info">
+            <h4>خالد العمري</h4>
+            <p>عميل منذ ٢٠٢٣</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer glass-card">
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p>© 2025 Smile Clinic - جميع الحقوق محفوظة</p>
+    <p style="margin-top: 10px; font-size: 14px;">العنوان: القاهرة - مدينة نصر | هاتف: 0100 000 0000</p>
+  </footer>
+
+  <script>
+    // ==================== نظام المواعيد المتاحة ====================
+    
+    // متغيرات عامة
+    let selectedTimeSlot = null;
+    let availableTimesCache = [];
+    let isBookingInProgress = false;
+
+    // دالة جلب التواريخ المتاحة
+    async function fetchAvailableDates() {
+      try {
+        console.log("جلب التواريخ المتاحة...");
+        const response = await fetch('/available-dates');
+        const data = await response.json();
+        
+        console.log("استجابة التواريخ:", data);
+        
+        if (data.success && data.dates && data.dates.length > 0) {
+          return data.dates;
+        } else {
+          console.error('No dates received:', data);
+          showAlert('حدث خطأ في جلب التواريخ المتاحة', 'error');
+          return [];
+        }
+      } catch (error) {
+        console.error('Error fetching dates:', error);
+        showAlert('حدث خطأ في الاتصال بالخادم', 'error');
+        return [];
+      }
+    }
+
+    // دالة تهيئة التواريخ في القائمة المنسدلة
+    async function initializeDateDropdown() {
+      const dateSelect = document.getElementById('date');
+      if (!dateSelect) return;
+      
+      dateSelect.innerHTML = '<option value="">-- جاري تحميل التواريخ --</option>';
+      dateSelect.disabled = true;
+      
+      const dates = await fetchAvailableDates();
+      
+      dateSelect.innerHTML = '<option value="">-- اختر التاريخ --</option>';
+      
+      if (dates.length === 0) {
+        dateSelect.innerHTML = '<option value="">-- لا توجد تواريخ متاحة --</option>';
+        dateSelect.disabled = true;
+        showAlert('لا توجد تواريخ متاحة حالياً', 'warning');
+        return;
+      }
+      
+      dates.forEach(date => {
+        const option = document.createElement('option');
+        option.value = date.value;
+        option.textContent = date.display;
+        dateSelect.appendChild(option);
+      });
+      
+      dateSelect.disabled = false;
+      console.log("✅ تم تحميل", dates.length, "تاريخ");
+    }
+
+    // دالة جلب المواعيد المتاحة
+    async function fetchAvailableTimes(date) {
+      try {
+        console.log("جلب المواعيد المتاحة لـ:", date);
+        const response = await fetch(`/available-times?date=${date}`);
+        const data = await response.json();
+        
+        console.log("استجابة المواعيد:", data);
+        
+        if (data.success) {
+          return {
+            available: data.availableTimes || [],
+            booked: data.bookedTimes || []
+          };
+        } else {
+          console.error('Error fetching times:', data.message);
+          showAlert(data.message, 'error');
+          return { available: [], booked: [] };
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showAlert('حدث خطأ في جلب المواعيد المتاحة', 'error');
+        return { available: [], booked: [] };
+      }
+    }
+
+    // دالة عرض المواعيد المتاحة
+    async function displayAvailableTimes(date) {
+      const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+      const timeSlots = document.getElementById('timeSlots');
+      const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+      const bookBtn = document.getElementById('bookBtn');
+      
+      if (!date) {
+        timeSlotsContainer.style.display = 'none';
+        bookBtn.disabled = true;
+        return;
+      }
+
+      // Format date for display
+      const selectedOption = document.querySelector(`#date option[value="${date}"]`);
+      const displayDate = selectedOption ? selectedOption.textContent : date;
+      selectedDateDisplay.textContent = displayDate;
+
+      // Show loading
+      timeSlotsContainer.style.display = 'block';
+      timeSlots.innerHTML = '<div style="text-align: center; padding: 20px;"><div class="loading-spinner" style="margin: 0 auto;"></div><p style="margin-top: 10px; color: #4a627a;">جاري تحميل المواعيد...</p></div>';
+
+      // Fetch available times
+      const { available, booked } = await fetchAvailableTimes(date);
+      availableTimesCache = available;
+
+      if (available.length === 0 && booked.length === 0) {
+        timeSlots.innerHTML = '<div style="text-align: center; padding: 20px; color: #856404; background: #fff3cd; border-radius: 20px;">لا توجد مواعيد متاحة في هذا اليوم</div>';
+        bookBtn.disabled = true;
+        return;
+      }
+
+      // Clear and populate time slots
+      timeSlots.innerHTML = '';
+      
+      // Add available slots
+      if (available.length > 0) {
+        available.forEach(time => {
+          const slot = document.createElement('div');
+          slot.className = 'time-slot';
+          slot.textContent = time;
+          slot.onclick = () => selectTimeSlot(slot, time);
+          timeSlots.appendChild(slot);
+        });
+      }
+
+      // Add booked slots (disabled)
+      if (booked.length > 0) {
+        booked.forEach(time => {
+          const slot = document.createElement('div');
+          slot.className = 'time-slot booked';
+          slot.textContent = time + ' (محجوز)';
+          timeSlots.appendChild(slot);
+        });
+      }
+
+      // If no available slots
+      if (available.length === 0) {
+        const message = document.createElement('div');
+        message.style.cssText = 'text-align: center; padding: 20px; color: #856404; background: #fff3cd; border-radius: 20px; width: 100%;';
+        message.textContent = 'لا توجد مواعيد متاحة في هذا اليوم';
+        timeSlots.appendChild(message);
+      }
+
+      bookBtn.disabled = true;
+    }
+
+    // دالة اختيار موعد
+    function selectTimeSlot(slotElement, time) {
+      // Remove selected class from all slots
+      document.querySelectorAll('.time-slot').forEach(slot => {
+        slot.classList.remove('selected');
+      });
+      
+      // Add selected class to clicked slot
+      slotElement.classList.add('selected');
+      selectedTimeSlot = time;
+      document.getElementById('selectedTime').value = time;
+      document.getElementById('bookBtn').disabled = false;
+    }
+
+    // دالة عرض رسالة
+    function showAlert(message, type = 'success') {
+      const alertDiv = document.getElementById('bookingAlert');
+      if (!alertDiv) return;
+      
+      alertDiv.style.display = 'block';
+      alertDiv.className = `alert-message alert-${type}`;
+      alertDiv.textContent = message;
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        alertDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    // دالة إرسال الحجز للسيرفر
+    async function sendBookingToServer(bookingData) {
+      try {
+        console.log("📤 بيانات الحجز:", bookingData);
+        
+        const response = await fetch('/book', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bookingData)
+        });
+
+        console.log("📥 استجابة السيرفر:", response.status);
+        
+        const data = await response.json();
+        console.log("📦 بيانات الاستجابة:", data);
+        
+        if (response.status === 409) {
+          return { success: false, error: 'للأسف، هذا الموعد تم حجزه للتو. الرجاء اختيار موعد آخر' };
+        }
+        
+        if (data.success) {
+          return { success: true, data };
+        } else {
+          return { success: false, error: data.message || 'فشل في إرسال الحجز' };
+        }
+      } catch (error) {
+        console.error('❌ خطأ في الاتصال بالسيرفر:', error);
+        return { success: false, error: 'خطأ في الاتصال بالخادم' };
+      }
+    }
+
+    // ==================== نظام المحادثة الذكية مع السجل المرضي ====================
+    
+    // حالة المحادثة لكل مستخدم
+    let conversationState = {
+      step: 'greeting',
+      answers: {
+        reason: '',
+        pain_level: '',
+        symptoms: '',
+        medical_conditions: '',
+        medications: '',
+        allergies: '',
+        last_visit: ''
+      }
+    };
+
+    // إنشاء عناصر المحادثة
+    document.addEventListener('DOMContentLoaded', function() {
+      // تهيئة التواريخ
+      initializeDateDropdown();
+      
+      // إضافة نافذة المحادثة
+      if (!document.getElementById('aiChatModal')) {
+        const chatModal = document.createElement('div');
+        chatModal.className = 'ai-chat-modal';
+        chatModal.id = 'aiChatModal';
+        chatModal.innerHTML = `
+          <div class="ai-chat-header">
+            <h3>🤖 المساعد الذكي - عيادة الأسنان</h3>
+            <button class="close-chat" onclick="toggleAIChat()">×</button>
+          </div>
+          <div class="ai-chat-messages" id="aiChatMessages">
+            <div class="message ai-message">
+              👋 مرحباً! أنا المساعد الذكي. هساعدك في الحجز وأسألك بعض الأسئلة الطبية عشان الدكتور يكون جاهز لك.
+            </div>
+          </div>
+          <div class="ai-chat-input-area">
+            <input type="text" class="ai-chat-input" id="aiChatInput" placeholder="اكتب ردك هنا..." onkeypress="if(event.key==='Enter') handleUserInput()">
+            <button class="ai-send-btn" onclick="handleUserInput()">➤</button>
+          </div>
+          <div class="ai-progress" style="padding: 0 15px 15px; display: none;">
+            <div style="height: 4px; background: #e0e0e0; border-radius: 2px;">
+              <div id="aiProgressBar" style="width: 0%; height: 100%; background: #2b6c9e; border-radius: 2px; transition: width 0.3s;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 5px; color: #4a627a; font-size: 12px;">
+              <span>جمع المعلومات</span>
+              <span id="aiProgressText">0/7</span>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(chatModal);
+      }
+
+      // إضافة CSS للمحادثة
+      const chatStyle = document.createElement('style');
+      chatStyle.textContent = `
+        .ai-chat-modal {
+          position: fixed;
+          bottom: 100px;
+          left: 30px;
+          width: 380px;
+          max-height: 550px;
+          background: white;
+          border-radius: 25px;
+          box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+          z-index: 1001;
+          display: none;
+          flex-direction: column;
+          overflow: hidden;
+          border: 1px solid rgba(43, 108, 158, 0.2);
+        }
+        .ai-chat-modal.show {
+          display: flex;
+        }
+        .ai-chat-header {
+          background: linear-gradient(135deg, #1a4972, #2b6c9e);
+          color: white;
+          padding: 18px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .ai-chat-header h3 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 700;
+        }
+        .close-chat {
+          background: none;
+          border: none;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+        }
+        .close-chat:hover {
+          background: rgba(255,255,255,0.2);
+        }
+        .ai-chat-messages {
+          flex: 1;
+          padding: 20px;
+          overflow-y: auto;
+          max-height: 350px;
+          background: #f8faff;
+          display: flex;
+          flex-direction: column;
+        }
+        .message {
+          margin-bottom: 15px;
+          padding: 12px 18px;
+          border-radius: 20px;
+          max-width: 85%;
+          word-wrap: break-word;
+          line-height: 1.6;
+          font-size: 14px;
+          animation: messagePop 0.3s ease;
+        }
+        @keyframes messagePop {
+          from { transform: translateY(10px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .ai-message {
+          background: white;
+          border: 1px solid rgba(43, 108, 158, 0.15);
+          align-self: flex-start;
+          margin-right: auto;
+          border-bottom-right-radius: 5px;
+          color: #1e3a6b;
+        }
+        .user-message {
+          background: #2b6c9e;
+          color: white;
+          align-self: flex-end;
+          margin-left: auto;
+          border-bottom-left-radius: 5px;
+        }
+        .ai-options {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 12px;
+        }
+        .ai-option-btn {
+          padding: 10px 18px;
+          border-radius: 30px;
+          border: 1px solid #2b6c9e;
+          background: white;
+          color: #2b6c9e;
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 600;
+          transition: all 0.2s;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .ai-option-btn:hover {
+          background: #2b6c9e;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(43, 108, 158, 0.3);
+        }
+        .ai-chat-input-area {
+          padding: 15px 20px;
+          border-top: 1px solid #eef2f7;
+          display: flex;
+          gap: 10px;
+          background: white;
+        }
+        .ai-chat-input {
+          flex: 1;
+          padding: 12px 18px;
+          border: 1px solid #dde3ed;
+          border-radius: 30px;
+          outline: none;
+          font-size: 14px;
+          transition: all 0.2s;
+        }
+        .ai-chat-input:focus {
+          border-color: #2b6c9e;
+          box-shadow: 0 0 0 3px rgba(43, 108, 158, 0.1);
+        }
+        .ai-send-btn {
+          width: 45px;
+          height: 45px;
+          border-radius: 25px;
+          background: #2b6c9e;
+          border: none;
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          transition: all 0.2s;
+        }
+        .ai-send-btn:hover {
+          background: #1a4972;
+          transform: scale(1.05);
+        }
+        .loading-ai {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 15px 20px;
+        }
+        .loading-ai span {
+          width: 8px;
+          height: 8px;
+          background: #2b6c9e;
+          border-radius: 4px;
+          animation: bounce 0.5s infinite alternate;
+        }
+        .loading-ai span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-ai span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+          to { transform: translateY(-5px); }
+        }
+        .ai-progress {
+          background: white;
+          border-top: 1px solid #eef2f7;
+        }
+        .medical-summary {
+          background: #e3f0ff;
+          border-right: 4px solid #2b6c9e;
+          padding: 15px;
+          margin: 10px 0;
+          border-radius: 15px;
+          font-size: 13px;
+          color: #1e3a6b;
+        }
+        .medical-summary h4 {
+          margin: 0 0 8px 0;
+          color: #1a4972;
+          font-size: 14px;
+        }
+      `;
+      document.head.appendChild(chatStyle);
+
+      // Event listeners for booking
+      const dateSelect = document.getElementById('date');
+      const bookBtn = document.getElementById('bookBtn');
+
+      if (dateSelect) {
+        dateSelect.addEventListener('change', function(e) {
+          displayAvailableTimes(e.target.value);
+        });
+      }
+
+      if (bookBtn) {
+        bookBtn.addEventListener('click', async function() {
+          if (isBookingInProgress) {
+            showAlert('جاري معالجة الحجز السابق...', 'warning');
+            return;
+          }
+
+          const name = document.getElementById('name')?.value.trim();
+          const phone = document.getElementById('phone')?.value.trim();
+          const date = document.getElementById('date')?.value;
+          const time = document.getElementById('selectedTime')?.value;
+          const reason = document.getElementById('reason')?.value;
+          
+          if (!name || !phone || !date || !time) {
+            showAlert("الرجاء إدخال جميع البيانات واختيار موعد", 'error');
+            return;
+          }
+
+          if (phone.length < 10) {
+            showAlert("الرجاء إدخال رقم جوال صحيح", 'error');
+            return;
+          }
+
+          isBookingInProgress = true;
+          bookBtn.disabled = true;
+          bookBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحجز...';
+
+          // Prepare booking data
+          const bookingData = {
+            name: name,
+            phone: phone,
+            date: date,
+            time: time,
+            reason: reason || 'غير محدد',
+            medical_conditions: conversationState.answers.medical_conditions || '',
+            medications: conversationState.answers.medications || '',
+            allergies: conversationState.answers.allergies || '',
+            last_visit: conversationState.answers.last_visit || '',
+            pain_level: conversationState.answers.pain_level || '',
+            symptoms: conversationState.answers.symptoms || ''
+          };
+
+          const result = await sendBookingToServer(bookingData);
+          
+          if (result.success) {
+            showAlert("✅ تم إرسال طلب الحجز بنجاح! سنتواصل معك قريباً.", 'success');
+            
+            // Clear form
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('selectedTime').value = '';
+            document.getElementById('reason').value = '';
+            document.getElementById('timeSlotsContainer').style.display = 'none';
+            
+            // Reset conversation
+            resetConversation();
+            
+            // Refresh available times for the selected date
+            if (date) {
+              displayAvailableTimes(date);
+            }
+            
+            // Remove medical summary if exists
+            const oldSummary = document.querySelector('.medical-summary');
+            if (oldSummary) oldSummary.remove();
+            
+          } else {
+            showAlert(`❌ ${result.error}`, 'error');
+            // Refresh available times if there was a conflict
+            if (result.error.includes('محجوز')) {
+              displayAvailableTimes(date);
+            }
+          }
+
+          isBookingInProgress = false;
+          bookBtn.innerHTML = '<i class="fas fa-calendar-check"></i> تأكيد الحجز';
+          bookBtn.disabled = !date || !selectedTimeSlot;
+        });
+      }
+    });
+
+    // عرض مؤشر التقدم
+    function updateProgress() {
+      const progressBar = document.getElementById('aiProgressBar');
+      const progressText = document.getElementById('aiProgressText');
+      if (!progressBar || !progressText) return;
+
+      const answeredCount = Object.values(conversationState.answers).filter(v => v && v !== '').length;
+      const total = 7;
+      const percentage = (answeredCount / total) * 100;
+      
+      progressBar.style.width = percentage + '%';
+      progressText.textContent = `${answeredCount}/${total}`;
+      
+      const progressDiv = document.querySelector('.ai-progress');
+      if (progressDiv && answeredCount > 0) {
+        progressDiv.style.display = 'block';
+      }
+    }
+
+    // توليد ملخص طبي
+    function generateMedicalSummary() {
+      const answers = conversationState.answers;
+      let summary = '📋 **السجل الطبي**:\n\n';
+      
+      if (answers.reason) summary += `• سبب الزيارة: ${answers.reason}\n`;
+      if (answers.pain_level) {
+        const painEmoji = ['😊', '🙂', '😐', '😟', '😖'];
+        summary += `• مستوى الألم: ${painEmoji[answers.pain_level-1]} (${answers.pain_level}/5)\n`;
+      }
+      if (answers.symptoms && answers.symptoms !== 'لا شيء') summary += `• الأعراض: ${answers.symptoms}\n`;
+      if (answers.medical_conditions && answers.medical_conditions !== 'لا شيء') summary += `• أمراض مزمنة: ${answers.medical_conditions}\n`;
+      if (answers.medications && answers.medications !== 'لا شيء') summary += `• أدوية: ${answers.medications}\n`;
+      if (answers.allergies && answers.allergies !== 'لا شيء') summary += `• حساسية: ${answers.allergies}\n`;
+      if (answers.last_visit && answers.last_visit !== 'لا شيء') summary += `• آخر زيارة: ${answers.last_visit}\n`;
+      
+      return summary;
+    }
+
+    // معالجة إدخال المستخدم (للمحادثة)
+    function handleUserInput(inputText = null) {
+      const input = document.getElementById('aiChatInput');
+      if (!input) return;
+      
+      const userMessage = inputText || input.value.trim();
+      if (!userMessage) return;
+      
+      addMessage(userMessage, true);
+      input.value = '';
+      
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'message ai-message loading-ai';
+      loadingDiv.innerHTML = '<span></span><span></span><span></span>';
+      document.getElementById('aiChatMessages').appendChild(loadingDiv);
+      
+      setTimeout(() => {
+        loadingDiv.remove();
+        processConversation(userMessage);
+      }, 500);
+    }
+
+    // معالجة المحادثة
+    function processConversation(userMessage) {
+      const state = conversationState;
+      
+      // بداية المحادثة
+      if (state.step === 'greeting') {
+        if (userMessage === 'نعم' || userMessage === 'حجز موعد') {
+          state.step = 'collecting';
+          addMessage('👍 ممتاز! هسألك شوية أسئلة طبية:', false);
+          setTimeout(() => askQuestion('reason'), 500);
+        } else {
+          handleGeneralResponse(userMessage);
+        }
+        return;
+      }
+      
+      // جمع المعلومات الطبية
+      if (state.step === 'collecting') {
+        const currentQuestion = getCurrentQuestion();
+        const shouldContinue = saveAnswer(currentQuestion, userMessage);
+        
+        if (shouldContinue === false) {
+          return;
+        }
+        
+        setTimeout(() => askNextQuestion(), 500);
+        return;
+      }
+      
+      // تأكيد الحجز
+      if (state.step === 'confirm') {
+        if (userMessage === 'تأكيد') {
+          completeBooking();
+        } else if (userMessage === 'تعديل') {
+          resetConversation();
+          addMessage('حسناً، لنبدأ من جديد. ما هو سبب الزيارة؟', false, ['ألم', 'تنظيف', 'تبييض', 'تقويم', 'كشف']);
+        }
+        return;
+      }
+      
+      // ردود عامة
+      handleGeneralResponse(userMessage);
+    }
+
+    // حفظ الإجابة
+    function saveAnswer(question, answer) {
+      if (question === 'reason') {
+        conversationState.answers.reason = answer;
+      } else if (question === 'pain_level') {
+        const match = answer.match(/[1-5]/);
+        if (match) {
+          conversationState.answers.pain_level = match[0];
+        } else {
+          addMessage('من فضلك اختر رقم من ١ إلى ٥', false, ['١', '٢', '٣', '٤', '٥']);
+          return false;
+        }
+      } else if (question === 'symptoms') {
+        conversationState.answers.symptoms = answer;
+      } else if (question === 'medical_conditions') {
+        conversationState.answers.medical_conditions = answer;
+      } else if (question === 'medications') {
+        conversationState.answers.medications = answer;
+      } else if (question === 'allergies') {
+        conversationState.answers.allergies = answer;
+      } else if (question === 'last_visit') {
+        conversationState.answers.last_visit = answer;
+      }
+      
+      updateProgress();
+      return true;
+    }
+
+    // السؤال الحالي
+    function getCurrentQuestion() {
+      const answers = conversationState.answers;
+      if (!answers.reason) return 'reason';
+      if (answers.reason.includes('ألم') && !answers.pain_level) return 'pain_level';
+      if (!answers.symptoms) return 'symptoms';
+      if (!answers.medical_conditions) return 'medical_conditions';
+      if (!answers.medications) return 'medications';
+      if (!answers.allergies) return 'allergies';
+      if (!answers.last_visit) return 'last_visit';
+      return null;
+    }
+
+    // طرح السؤال التالي
+    function askNextQuestion() {
+      const next = getCurrentQuestion();
+      if (next) {
+        askQuestion(next);
+      } else {
+        showSummaryAndConfirm();
+      }
+    }
+
+    // طرح سؤال محدد
+    function askQuestion(question) {
+      let message = '';
+      let options = [];
+      
+      switch(question) {
+        case 'reason':
+          message = 'ما هو سبب الزيارة؟';
+          options = ['ألم في الأسنان', 'تنظيف وجير', 'تبييض', 'تقويم', 'كشف دوري'];
+          break;
+        case 'pain_level':
+          message = 'على مقياس من ١ إلى ٥، مستوى الألم؟';
+          options = ['١ (خفيف)', '٢', '٣', '٤', '٥ (مزعج)'];
+          break;
+        case 'symptoms':
+          message = 'هل تعاني من أي أعراض أخرى؟';
+          options = ['ورم', 'حساسية', 'نزيف', 'صداع', 'لا شيء'];
+          break;
+        case 'medical_conditions':
+          message = 'هل تعاني من أي أمراض مزمنة؟';
+          options = ['سكر', 'ضغط', 'قلب', 'ربو', 'لا شيء'];
+          break;
+        case 'medications':
+          message = 'هل تتناول أي أدوية بانتظام؟';
+          options = ['أسبرين', 'مسيلات دم', 'أنسولين', 'لا شيء'];
+          break;
+        case 'allergies':
+          message = 'هل لديك حساسية من أي أدوية؟';
+          options = ['بنسلين', 'مخدر', 'إيبوبروفين', 'لا شيء'];
+          break;
+        case 'last_visit':
+          message = 'متى كانت آخر زيارة لطبيب الأسنان؟';
+          options = ['أقل من ٦ شهور', '٦ شهور - سنة', 'أكثر من سنة', 'أول مرة'];
+          break;
+      }
+      
+      addMessage(message, false, options);
+    }
+
+    // عرض الملخص والتأكيد
+    function showSummaryAndConfirm() {
+      const summary = generateMedicalSummary();
+      
+      let message = '✅ **تم جمع المعلومات الطبية**\n\n';
+      message += summary;
+      message += '\n\n📝 هل تريد تأكيد الحجز الآن؟';
+      
+      addMessage(message, false, ['تأكيد', 'تعديل']);
+      conversationState.step = 'confirm';
+      
+      const summaryDiv = document.createElement('div');
+      summaryDiv.className = 'medical-summary';
+      summaryDiv.innerHTML = `<h4>📋 السجل الطبي</h4><pre style="white-space: pre-wrap; font-family: inherit;">${summary.replace(/\*\*/g, '')}</pre>`;
+      
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        const oldSummary = bookingSection.querySelector('.medical-summary');
+        if (oldSummary) oldSummary.remove();
+        bookingSection.insertBefore(summaryDiv, bookingSection.firstChild);
+      }
+    }
+
+    // إكمال الحجز
+    async function completeBooking() {
+      const name = document.getElementById('name')?.value.trim();
+      const phone = document.getElementById('phone')?.value.trim();
+      const date = document.getElementById('date')?.value;
+      const time = document.getElementById('selectedTime')?.value;
+      const reason = document.getElementById('reason')?.value;
+      
+      if (!name || !phone || !date || !time) {
+        addMessage('⚠️ فضلاً أكمل بيانات الحجز في النموذج أولاً', false, ['حسناً']);
+        return;
+      }
+
+      if (phone.length < 10) {
+        addMessage('⚠️ الرجاء إدخال رقم جوال صحيح', false, ['حسناً']);
+        return;
+      }
+
+      // تجهيز بيانات الحجز
+      const bookingData = {
+        name: name,
+        phone: phone,
+        date: date,
+        time: time,
+        reason: reason || conversationState.answers.reason || 'غير محدد',
+        medical_conditions: conversationState.answers.medical_conditions || '',
+        medications: conversationState.answers.medications || '',
+        allergies: conversationState.answers.allergies || '',
+        last_visit: conversationState.answers.last_visit || '',
+        pain_level: conversationState.answers.pain_level || '',
+        symptoms: conversationState.answers.symptoms || ''
+      };
+
+      const result = await sendBookingToServer(bookingData);
+      
+      if (result.success) {
+        const summary = generateMedicalSummary();
+        const confirmMessage = `🎉 **تم تأكيد حجزك بنجاح!**\n\n` +
+          `المريض: ${name}\n` +
+          `التاريخ: ${date}\n` +
+          `الوقت: ${time}\n\n` +
+          `📋 **السجل الطبي المرسل للدكتور:**\n${summary}\n\n` +
+          `✅ سيتم التواصل معك قريباً للتأكيد النهائي.`;
+        
+        addMessage(confirmMessage, false, ['شكراً']);
+        
+        // مسح النموذج
+        document.getElementById('name').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('selectedTime').value = '';
+        document.getElementById('reason').value = '';
+        document.getElementById('timeSlotsContainer').style.display = 'none';
+        document.getElementById('bookBtn').disabled = true;
+        
+        resetConversation();
+        
+        const oldSummary = document.querySelector('.medical-summary');
+        if (oldSummary) oldSummary.remove();
+        
+        // Refresh available times if needed
+        if (date) {
+          displayAvailableTimes(date);
+        }
+        
+      } else {
+        addMessage(`❌ **عذراً، ${result.error}**`, false, ['حسناً']);
+        if (result.error.includes('محجوز')) {
+          displayAvailableTimes(date);
+        }
+      }
+      
+      conversationState.step = 'done';
+    }
+
+    // إعادة تعيين المحادثة
+    function resetConversation() {
+      conversationState = {
+        step: 'greeting',
+        answers: {
+          reason: '',
+          pain_level: '',
+          symptoms: '',
+          medical_conditions: '',
+          medications: '',
+          allergies: '',
+          last_visit: ''
+        }
+      };
+      updateProgress();
+    }
+
+    // ردود عامة
+    function handleGeneralResponse(userMessage) {
+      let response = '';
+      let options = [];
+      
+      if (userMessage.includes('سعر') || userMessage.includes('أسعار')) {
+        response = '💰 **الأسعار:**\n\n• كشف: ٣٠٠ جنيه\n• تنظيف: ٢٥٠ جنيه\n• تبييض: ٨٠٠ جنيه\n• تقويم: يبدأ من ١٢٠٠ جنيه';
+        options = ['احجز موعد', 'عروض'];
+      } else if (userMessage.includes('خدمات')) {
+        response = '🦷 **خدماتنا:**\n\n• كشف شامل\n• تنظيف وجير\n• تبييض الأسنان\n• تقويم\n• حشو وعلاج\n• ابتسامة هوليود';
+        options = ['احجز موعد', 'أسعار'];
+      } else if (userMessage.includes('مواعيد')) {
+        response = '⏰ **مواعيد العمل:**\n\n• السبت - الخميس: ١٠ص - ١٠م\n• الجمعة: ٢م - ٨م';
+        options = ['احجز موعد'];
+      } else if (userMessage.includes('عروض')) {
+        response = '🎁 **عروض هذا الشهر:**\n\n• خصم ٢٠٪ على التبييض\n• كشف مجاني مع أول حجز\n• عرض العائلة: ٢+١ مجاناً';
+        options = ['احجز موعد'];
+      } else {
+        response = '👋 كيف أقدر أساعدك؟ اختر من الخيارات:';
+        options = ['حجز موعد', 'خدمات', 'أسعار', 'مواعيد', 'عروض'];
+      }
+      
+      addMessage(response, false, options);
+    }
+
+    // إضافة رسالة للمحادثة
+    function addMessage(text, isUser = false, options = null) {
+      const messages = document.getElementById('aiChatMessages');
+      if (!messages) return;
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
+      messageDiv.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      
+      if (options && !isUser) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'ai-options';
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'ai-option-btn';
+          btn.textContent = opt;
+          btn.onclick = () => handleUserInput(opt);
+          optionsDiv.appendChild(btn);
+        });
+        messageDiv.appendChild(optionsDiv);
+      }
+      
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // فتح/غلق المحادثة
+    function toggleAIChat() {
+      const modal = document.getElementById('aiChatModal');
+      if (modal) {
+        modal.classList.toggle('show');
+        if (modal.classList.contains('show') && conversationState.step === 'greeting') {
+          setTimeout(() => {
+            addMessage('👋 أهلاً بك! هل تريد حجز موعد؟', false, ['نعم', 'استفسار']);
+          }, 500);
+        }
+      }
+    }
+
+    // Mobile Navbar Toggle
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      const overlay = document.getElementById('navOverlay');
+
+      if(!toggle || !links || !overlay) return;
+
+      function openMenu(){
+        links.classList.add('open');
+        overlay.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu(){
+        links.classList.remove('open');
+        overlay.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', () => {
+        if(links.classList.contains('open')) closeMenu();
+        else openMenu();
+      });
+
+      overlay.addEventListener('click', closeMenu);
+
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if(window.matchMedia('(max-width: 768px)').matches) closeMenu();
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        if(!window.matchMedia('(max-width: 768px)').matches) closeMenu();
+      });
+    })();
+
+  </script>
+</body>
+</html>
